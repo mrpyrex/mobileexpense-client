@@ -1,25 +1,43 @@
 import React from 'react'
-import { View } from 'react-native'
-import AddTransaction from './src/components/AddTransaction'
-import Balance from './src/components/Balance'
-import Header from './src/components/Header'
-import IncomeExpense from './src/components/IncomeExpense'
-import TransactionList from './src/components/TransactionList'
 import { GlobalProvider } from './src/context/GlobalContext'
-import { globalStyles } from './src/styles/globalStyles'
+
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack';
+
+import TransactionDetailScreen from './src/screens/TransactionDetailScreen';
+import TransactionListScreen from './src/screens/TransactionListScreen';
+import MyTabs from './src/routes/MyTabs';
+
+
+const Stack = createStackNavigator()
 
 const App = () => {
   return (
     <GlobalProvider>
-      <View style={globalStyles.container}>
-        <Header />
-        <Balance />
-        <IncomeExpense/>
-        <AddTransaction />
-        <TransactionList />
-      </View>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name='Welcome' component={MyTabs} />
+          <Stack.Screen name='Transaction List' component={TransactionListScreen} />
+          <Stack.Screen name='Detail' component={TransactionDetailScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </GlobalProvider>
   )
 }
 
 export default App
+
+
+/* <View style={globalStyles.container}>
+        <Header />
+        <Balance />
+        <IncomeExpense/>
+        <AddTransaction />
+        <TransactionList />
+        </View> */
+
+      //   <Stack.Navigator>
+      //     <Stack.Screen name='Home' component={MyTabs} />
+      //     <Stack.Screen name='Transaction List' component={TransactionListScreen} />
+      //     <Stack.Screen name='Transaction Detail' component={TransactionDetailScreen} />
+      //  </Stack.Navigator>

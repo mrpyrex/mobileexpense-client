@@ -1,12 +1,26 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 
-const Transaction = ({item}) => {
+const Transaction = ({ item }) => {
+    
+    const sign = item.amount < 0 ? '-' : '+'
     return (
         <View>
-            <Text>{item.description} &#8358;{ item.amount}</Text>
+            <TouchableOpacity style={styles.transaction}>
+                <Text>{item.description} </Text>
+                <Text>{sign} &#8358;{Math.abs(item.amount)}</Text>
+            </TouchableOpacity>
         </View>
     )
 }
 
 export default Transaction
+
+const styles = StyleSheet.create({
+    transaction: {
+        padding: 15,
+        marginVertical: 8,
+        backgroundColor: 'blue',
+        borderRadius:10
+    }
+})
